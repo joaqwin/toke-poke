@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+state.json
+state.json.tmp
+assets/pokemon/*.part
+.venv/
