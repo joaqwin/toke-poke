@@ -344,11 +344,14 @@ class PokeWidget(QWidget):
         pix = None
         if pid is not None and self.manager.sprites.has(pid):
             pix = load_sprite(self.manager.sprite_path(pid), 64)
-        if pix is None:
-            pix = QPixmap(64, 64)
-            pix.fill(QColor(ACCENT))
-        icon = QIcon(pix)
-        self.setWindowIcon(icon)
+        if pix is not None:
+            icon = QIcon(pix)
+        else:
+            icon = QApplication.windowIcon()  # Pokébola (icono de la aplicación)
+            if icon.isNull():
+                fallback = QPixmap(64, 64)
+                fallback.fill(QColor(ACCENT))
+                icon = QIcon(fallback)
         if self.tray is not None:
             self.tray.setIcon(icon)
 
